@@ -20,6 +20,4 @@ jobs:
     - name: Build
       run: dotnet build KhamsaCourseProject/KhamsaCourseProject/KhamsaCourseProject.csproj --no-restore
     - name: Test
-      run: dotnet test  KhamsaCourseProject/KhamsaCourseProject/KhamsaCourseProject.csproj --no-build --verbosity normal 
-    - name: Publish
-      run: dotnet publish KhamsaCourseProject/KhamsaCourseProject -c Release  
+      run: dotnet test  KhamsaCourseProject/KhamsaCourseProject/KhamsaCourseProject.csproj --no-build --verbosity normal
