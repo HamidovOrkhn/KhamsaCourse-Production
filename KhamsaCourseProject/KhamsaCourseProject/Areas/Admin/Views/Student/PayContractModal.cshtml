@@ -1,0 +1,41 @@
+﻿@model List<PaymentModalDto>
+@{ 
+    Layout = "";
+}
+<form asp-action="Details" asp-controller="Employee" asp-area="Admin" method="get">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2">
+                            <input type="text" value="@ViewData["DateFrom"] - @ViewData["DateTo"]" name="daterange" class="form-control" />
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary">Axtar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Ödəniş Tarixi</th>
+            <th scope="col">Dəyər</th>
+            <th scope="col">Müqavilə Dəyəri</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.PaymentDate</th>
+                <td>@item.Value</td>
+                <td>@item.ContractValue</td>
+            </tr>
+        }
+    </tbody>
+</table>
