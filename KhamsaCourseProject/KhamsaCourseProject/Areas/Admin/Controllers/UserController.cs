@@ -160,13 +160,13 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
 
             if (request.Rememberme)
             {
-                HttpContext.Response.Cookies.Append("token", token, new CookieOptions { Secure = true, HttpOnly = true, Expires = DateTimeOffset.UtcNow.AddDays(100) });
-                HttpContext.Response.Cookies.Append("uid", Convert.ToString(user.Id), new CookieOptions { Secure = true, HttpOnly = true, Expires = DateTimeOffset.UtcNow.AddDays(100) });
+                HttpContext.Response.Cookies.Append("token", token, new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(100) });
+                HttpContext.Response.Cookies.Append("uid", Convert.ToString(user.Id), new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(100) });
             }
             else
             {
-                HttpContext.Response.Cookies.Append("token", token, new CookieOptions { Secure = true, HttpOnly = true });
-                HttpContext.Response.Cookies.Append("uid", Convert.ToString(user.Id), new CookieOptions { Secure = true, HttpOnly = true });
+                HttpContext.Response.Cookies.Append("token", token);
+                HttpContext.Response.Cookies.Append("uid", Convert.ToString(user.Id));
             }
 
             _db.SaveChanges();
