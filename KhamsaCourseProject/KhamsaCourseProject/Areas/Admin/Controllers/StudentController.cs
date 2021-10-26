@@ -157,7 +157,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             #region Mapping StudentValue
             Student student = request.Adapt(request);
 
-            decimal discount = (decimal)ExConverter.DiscountedValue(request.DiscountType, request.Value, request.Discount);
+            double discount = ExConverter.DiscountedValue(request.DiscountType, request.Value, request.Discount);
             StudentContract contract = new StudentContract
             {
                 ContractDate = request.ContractDate,

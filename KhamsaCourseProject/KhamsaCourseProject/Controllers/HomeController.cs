@@ -13,7 +13,7 @@ namespace KhamsaCourseProject.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index","Home", new { Area="Admin"});
         }
     }
 }

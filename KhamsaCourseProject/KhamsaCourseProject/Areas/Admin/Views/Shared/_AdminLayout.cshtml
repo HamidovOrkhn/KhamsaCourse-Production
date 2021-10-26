@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     List<Role> roles = new List<Role>();
     User user = new User();
     if (ViewData["User-Roles"] is object)
@@ -87,14 +87,27 @@
                 <ul class="list-unstyled">
                     <li><a asp-action="Index" asp-controller="Home" asp-area="Admin"> <i class="icon-home"></i>Ana Səhifə</a></li>
                     <li><a asp-action="Index" asp-controller="Sector"> <i class="icon-grid"></i>Filiallar</a></li>
-                    <li><a asp-action="Index" asp-controller="Statistics" > <i class="fa fa-bar-chart"></i>Statistikalar </a></li>
-                    <li>
-                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>İstifadəçilər</a>
-                        <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                            <li><a asp-action="Index" asp-controller="User" asp-area="Admin">Siyahı</a></li>
-                            <li><a asp-action="Create" asp-controller="User" asp-area="Admin">Qeydiyyat</a></li>
-                        </ul>
-                    </li>
+                    @if (roles.Any(a => a.ActivityId == 1 && a.TypeId == 2))
+                    {
+                        <li><a asp-action="Index" asp-controller="Statistics"> <i class="fa fa-bar-chart"></i>Statistikalar</a></li>
+                    }
+                    @if (roles.Any(a => a.ActivityId == 3 && a.TypeId == 2) || roles.Any(a => a.ActivityId == 2 && a.TypeId == 2))
+                    {
+                        <li>
+                            <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>İstifadəçilər</a>
+                            <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                                @if (roles.Any(a => a.ActivityId == 3 && a.TypeId == 2))
+                                {
+                                    <li><a asp-action="Index" asp-controller="User" asp-area="Admin">Siyahı</a></li>
+                                }
+                                @if (roles.Any(a => a.ActivityId == 2 && a.TypeId == 2))
+                                {
+                                    <li><a asp-action="Create" asp-controller="User" asp-area="Admin">Qeydiyyat</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
                 </ul>
             </nav>
             <div class="content-inner">

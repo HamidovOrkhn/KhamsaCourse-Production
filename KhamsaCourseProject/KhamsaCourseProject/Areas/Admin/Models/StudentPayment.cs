@@ -6,7 +6,7 @@ namespace KhamsaCourseProject.Areas.Admin.Models
     public class StudentPayment
     {
         public long Id { get; set; }
-        public decimal Value { get; set; }
+        public double Value { get; set; }
         public DateTime PaymentDate { get; set; }
         public int ProcessId { get; set; }
         public int PaymentTypeId { get; set; }

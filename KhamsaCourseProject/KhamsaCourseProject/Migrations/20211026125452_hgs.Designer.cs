@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KhamsaCourseProject.Migrations
 {
     [DbContext(typeof(AdminContext))]
-    [Migration("20211024131814_mysql")]
-    partial class mysql
+    [Migration("20211026125452_hgs")]
+    partial class hgs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,8 +53,8 @@ namespace KhamsaCourseProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Cost")
+                        .HasColumnType("double");
 
                     b.Property<DateTime>("CostDate")
                         .HasColumnType("datetime(6)");
@@ -126,14 +126,14 @@ namespace KhamsaCourseProject.Migrations
                     b.Property<int>("ContractTypeId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Debt")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Debt")
+                        .HasColumnType("double");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Value")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -165,8 +165,8 @@ namespace KhamsaCourseProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Benefit")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Benefit")
+                        .HasColumnType("double");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -193,8 +193,8 @@ namespace KhamsaCourseProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Cost")
+                        .HasColumnType("double");
 
                     b.Property<DateTime>("CostDate")
                         .HasColumnType("datetime(6)");
@@ -221,8 +221,8 @@ namespace KhamsaCourseProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Benefit")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Benefit")
+                        .HasColumnType("double");
 
                     b.Property<DateTime>("BenefitDate")
                         .HasColumnType("datetime(6)");
@@ -249,8 +249,8 @@ namespace KhamsaCourseProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Cost")
+                        .HasColumnType("double");
 
                     b.Property<DateTime>("CostDate")
                         .HasColumnType("datetime(6)");
@@ -305,8 +305,8 @@ namespace KhamsaCourseProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Benefit")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Benefit")
+                        .HasColumnType("double");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -450,17 +450,17 @@ namespace KhamsaCourseProject.Migrations
                     b.Property<int>("ContractTypeId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Debt")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Debt")
+                        .HasColumnType("double");
 
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Discount")
+                        .HasColumnType("double");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Value")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -516,8 +516,8 @@ namespace KhamsaCourseProject.Migrations
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Value")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 

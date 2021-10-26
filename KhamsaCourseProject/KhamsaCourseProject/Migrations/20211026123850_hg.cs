@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KhamsaCourseProject.Migrations
 {
-    public partial class mysql : Migration
+    public partial class hg : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -423,9 +423,9 @@ namespace KhamsaCourseProject.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ContractDate = table.Column<DateTime>(nullable: false),
                     StudentId = table.Column<int>(nullable: false),
-                    Value = table.Column<decimal>(nullable: false),
-                    Debt = table.Column<decimal>(nullable: false),
-                    Discount = table.Column<decimal>(nullable: false),
+                    Value = table.Column<double>(nullable: false),
+                    Debt = table.Column<double>(nullable: false),
+                    Discount = table.Column<double>(nullable: false),
                     ContractTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

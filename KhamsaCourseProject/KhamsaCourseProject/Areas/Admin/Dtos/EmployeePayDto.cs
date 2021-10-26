@@ -9,7 +9,7 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
 {
     public class EmployeePayDto
     {
-        public decimal Value { get; set; }
+        public double Value { get; set; }
         public DateTime PaymentDate { get; set; }
         public string Description { get; set; }
         public EmployeeContract Contract { get; set; }

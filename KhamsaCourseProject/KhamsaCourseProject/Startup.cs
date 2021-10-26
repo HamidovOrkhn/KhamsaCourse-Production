@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
 using System.Threading.Tasks;
+using KhamsaCourseProject.Areas.Admin.Lib.Quartz;
 
 namespace KhamsaCourseProject
 {
@@ -34,6 +35,9 @@ namespace KhamsaCourseProject
             {
                 options.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
+            services.AddTransient<JobFactory>();
+            services.AddScoped<DataJob>();
+            services.AddScoped<IDatabaseMonthlyUpdate, DatabaseMonthlyUpdate>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
