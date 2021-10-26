@@ -11,5 +11,3 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Publish
-      run: dotnet publish KhamsaCourseProject/KhamsaCourseProject -c Release
