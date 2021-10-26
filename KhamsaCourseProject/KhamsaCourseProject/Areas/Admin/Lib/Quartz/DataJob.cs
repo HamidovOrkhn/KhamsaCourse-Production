@@ -23,6 +23,7 @@ namespace KhamsaCourseProject.Areas.Admin.Lib.Quartz
                 var databaseUpdate = scope.ServiceProvider.GetService<IDatabaseMonthlyUpdate>();
 
                 await databaseUpdate.UpdateDatabase();
+                await databaseUpdate.UpdateEmployee();
             }
         }
     }

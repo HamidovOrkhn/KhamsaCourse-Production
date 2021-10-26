@@ -22,7 +22,7 @@ namespace KhamsaCourseProject.Areas.Admin.Lib.Quartz
                 .StartNow()
                 .WithSimpleSchedule(x => x
                 .WithIntervalInMinutes(1)
-               // .WithIntervalInHours(24)
+                //.WithIntervalInHours(24)
                 .RepeatForever())
                 .Build();
 

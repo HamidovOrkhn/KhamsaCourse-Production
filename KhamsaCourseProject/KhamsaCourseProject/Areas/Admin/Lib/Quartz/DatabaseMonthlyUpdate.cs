@@ -42,8 +42,36 @@ namespace KhamsaCourseProject.Areas.Admin.Lib.Quartz
                     _context.SaveChanges();
                 }
             }
-          
 
+
+        }
+        public async Task UpdateEmployee()
+        {
+            var datenow = DateTime.Now;
+
+            List<EmployeeContract> contracts = (from employee in _context.Employees.Where(a => a.IsActive == 1)
+                                               join contract in _context.EmployeeContracts on employee.Id equals contract.EmployeeId
+                                               where datenow >= contract.ContractDate.AddMonths(1) && contract.ContractDate.AddMonths(1) <= datenow
+                                               select new EmployeeContract
+                                               {
+                                                   ContractDate = contract.ContractDate,
+                                                   ContractType = contract.ContractType,
+                                                   ContractTypeId = contract.ContractTypeId,
+                                                   Debt = contract.Debt,
+                                                   Id = contract.Id,
+                                                   EmployeeId = contract.EmployeeId,
+                                                   Value = contract.Value
+                                               }).ToList();
+            if (contracts.Count > 0)
+            {
+                for (int i = 0; i < contracts.Count; i++)
+                {
+                    var cntr = _context.EmployeeContracts.Where(a => a.Id == contracts[i].Id).FirstOrDefault();
+                    cntr.Debt = cntr.Debt + cntr.Value;
+                    cntr.ContractDate = cntr.ContractDate.AddMonths(1);
+                    _context.SaveChanges();
+                }
+            }
         }
     }
 }
