@@ -21,8 +21,8 @@ namespace KhamsaCourseProject.Areas.Admin.Lib.Quartz
                 .WithIdentity("StudentTrigger", "default")
                 .StartNow()
                 .WithSimpleSchedule(x => x
-                .WithIntervalInMinutes(1)
-                //.WithIntervalInHours(24)
+                //.WithIntervalInMinutes(1)
+                .WithIntervalInHours(24)
                 .RepeatForever())
                 .Build();
 
