@@ -1,0 +1,64 @@
+﻿@model CheckDto 
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Əməliyyat Çeki</title>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="~/admin/vendor/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container justify-content-center p-4">
+        <div class="row justify-content-center">
+            <div class="col-4 justify-content-center m-4 border border-dark">
+                <h4 class="text-center mt-4">Əməliyyat Çeki</h4>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Ad, Soyad</th>
+                            <td>@Model.Student.Fullname</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Müəssisənin Adı</th>
+                            <td>Xəmsə Kursları</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Filial</th>
+                            <td>@Model.Sector.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ödəniş Tipi</th>
+                            <td>Tələbə Ödənişi</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Məbləğ</th>
+                            <td>@Model.Payment.Value</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Qalan Borc</th>
+                            <td>@Model.Contract.Debt</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ödəniş Tarixi</th>
+                            <td>@Model.Payment.PaymentDate</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Müqavilə Tarixi</th>
+                            <td>@Model.Contract.ContractDate</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Şagirdin Qeydiyyat Tarixi</th>
+                            <td>@Model.Student.RegistrationDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.print();
+    </script>
+</body>
+</html>

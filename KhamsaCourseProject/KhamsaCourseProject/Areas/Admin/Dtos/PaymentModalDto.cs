@@ -10,5 +10,7 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
         public string PaymentDate { get; set; }
         public double Value { get; set; }
         public double ContractValue { get; set; }
+        #nullable enable
+        public long? Id { get; set; }
     }
 }

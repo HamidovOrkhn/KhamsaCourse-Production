@@ -24,19 +24,17 @@ namespace KhamsaCourseProject.Areas.Admin.Helpers
         {
             if (!db.StudentClasses.Any())
             {
-                List<StudentClass> std = new List<StudentClass>();
-                std.Add(new StudentClass { Name = "1-ci sinif" });
-                std.Add(new StudentClass { Name = "2-ci sinif" });
-                std.Add(new StudentClass { Name = "3-ci sinif" });
-                std.Add(new StudentClass { Name = "4-ci sinif" });
-                std.Add(new StudentClass { Name = "5-ci sinif" });
-                std.Add(new StudentClass { Name = "6-ci sinif" });
-                std.Add(new StudentClass { Name = "7-ci sinif" });
-                std.Add(new StudentClass { Name = "8-ci sinif" });
-                std.Add(new StudentClass { Name = "9-ci sinif" });
-                std.Add(new StudentClass { Name = "10-ci sinif" });
-                std.Add(new StudentClass { Name = "11-ci sinif" });
-                db.StudentClasses.AddRange(std);
+                db.StudentClasses.Add(new StudentClass { Name = "1-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "2-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "3-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "4-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "5-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "6-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "7-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "8-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "9-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "10-ci sinif" });
+                db.StudentClasses.Add(new StudentClass { Name = "11-ci sinif" });
             }
             else
             {
@@ -119,11 +117,10 @@ namespace KhamsaCourseProject.Areas.Admin.Helpers
             if (!db.Activities.Any())
             {
                 var acts = new List<Activity>();
-                acts.Add(new Activity { Name = "Hesabatlar" });
-                acts.Add(new Activity { Name = "İstifadəçi Qeydiyyatı" });
-                acts.Add(new Activity { Name = "İstifadəçi Siyahısı" });
-                acts.Add(new Activity { Name = "Filial Silmə" });
-                db.Activities.AddRange(acts);
+                db.Activities.Add(new Activity { Name = "Hesabatlar" });
+                db.Activities.Add(new Activity { Name = "İstifadəçi Qeydiyyatı" });
+                db.Activities.Add(new Activity { Name = "İstifadəçi Siyahısı" });
+                db.Activities.Add(new Activity { Name = "Filial Silmə" });
             }
             else
             {

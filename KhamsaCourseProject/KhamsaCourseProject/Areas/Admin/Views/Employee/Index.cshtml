@@ -137,22 +137,16 @@
                 Tipi
             </th>
             <th>
-                Ev Telefonu
-            </th>
-            <th>
                 Mobil Telefonu
-            </th>
-            <th>
-                Qeydiyyat Tarixi
             </th>
             <th>
                 Filial @*@DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("az-Latn-AZ"))*@
             </th>
             <th>
-                Müqavilə Dəyəri
+                Saat Hesabı
             </th>
             <th>
-                Ümumi Borc
+                Maaş
             </th>
             <th>
                 Prosesslər
@@ -175,13 +169,7 @@
                         @item.EmployeeType.Name
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.MobileNumber)
-                    </td>
-                    <td>
-                        @item.RegistrationDate.ToShortDateString()
                     </td>
                     <td>
                         @item.Sector.Name
