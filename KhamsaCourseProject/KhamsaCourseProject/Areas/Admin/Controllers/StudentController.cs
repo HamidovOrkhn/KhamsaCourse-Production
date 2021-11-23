@@ -157,10 +157,10 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             #region Mapping StudentValue
             Student student = request.Adapt(request);
 
-            double discount = ExConverter.DiscountedValue(request.DiscountType, request.Value, request.Discount);
+            decimal discount = (decimal)ExConverter.DiscountedValue(request.DiscountType, request.Value, request.Discount);
             StudentContract contract = new StudentContract
             {
-                ContractDate = request.ContractDate,
+                ContractDate = request.RegistrationDate,
                 ContractTypeId = request.ContractType,
                 Discount = request.Value - discount,
                 Value = discount,
@@ -194,7 +194,6 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             object payments = _db.Payments.Where(a => a.ProcessId == id && a.CategoryId == 10 && a.PaymentDate >= dateFrom && a.PaymentDate <= dateTo
             ).ToList().Select(a => new PaymentModalDto
             {
-                Id = a.Id,
                 PaymentDate = a.PaymentDate.ToString("yyyy-MMM-dd HH:mm"),
                 Value = a.Value,
                 ContractValue = contract.Value
@@ -261,20 +260,6 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
 
             return RedirectToAction("Index", new { id = student.SectorId });
 
-        }
-        public IActionResult GetCheck(int id)
-        {
-            CheckDto model = new CheckDto();
-            StudentPayment payment = _db.Payments.Where(a => a.Id == id).FirstOrDefault();
-            Student student = _db.Students.Where(a => a.Id == payment.ProcessId).FirstOrDefault();
-            if (payment is object && student is object)
-            {
-                model.Student = student;
-                model.Contract = _db.Contracts.Where(a => a.StudentId == payment.ProcessId).FirstOrDefault();
-                model.Payment = payment;
-                model.Sector = _db.Sectors.Where(a => a.Id == student.SectorId).FirstOrDefault();
-            }
-            return View(model);
         }
     }
 }

@@ -8,9 +8,7 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
     public class PaymentModalDto
     {
         public string PaymentDate { get; set; }
-        public double Value { get; set; }
-        public double ContractValue { get; set; }
-        #nullable enable
-        public long? Id { get; set; }
+        public decimal Value { get; set; }
+        public decimal ContractValue { get; set; }
     }
 }

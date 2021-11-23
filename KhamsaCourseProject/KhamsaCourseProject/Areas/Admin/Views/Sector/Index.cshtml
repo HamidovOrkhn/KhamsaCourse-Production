@@ -4,13 +4,6 @@
     ViewData["Title"] = "Filiallar";
     Layout = "_AdminLayout";
 }
-@{
-    List<Role> roles = new List<Role>();
-    if (ViewData["User-Roles"] is object)
-    {
-        roles = ViewData["User-Roles"] as List<Role>;
-    }
-}
 
 
 
@@ -81,11 +74,7 @@
                         <td>
 
                             <a asp-controller="Sector" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Detallar</a>
-                            @if (roles.Any(a => a.ActivityId == 4 && a.TypeId == 2))
-                            {
-                                <a asp-controller="Sector" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger delete-sector">Silmək</a>
-                            }
-
+                            <a asp-controller="Sector" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger delete-sector">Silmək</a>
 
                             @*@Html.ActionLink("Detallar", "Details", new { id = item.Id })*@
                             @*@Html.ActionLink("Sil", "Delete", new { id = item.Id })*@
@@ -105,6 +94,6 @@
             $('#delete-data').prop('href', hrefValue);
             $('#delete-sector-modal').modal('show');
         })
-
+       
     </script>
 }

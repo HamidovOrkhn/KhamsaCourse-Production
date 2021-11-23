@@ -11,9 +11,9 @@ namespace KhamsaCourseProject.Areas.Admin.Models
         public DateTime ContractDate { get; set; }
         public int StudentId { get; set; }
         public Student Student { get; set; }
-        public double Value { get; set; }
-        public double Debt { get; set; }
-        public double Discount { get; set; }
+        public decimal Value { get; set; }
+        public decimal Debt { get; set; }
+        public decimal Discount { get; set; }
         public int ContractTypeId { get; set; }
         public ContractType ContractType { get; set; }
     }

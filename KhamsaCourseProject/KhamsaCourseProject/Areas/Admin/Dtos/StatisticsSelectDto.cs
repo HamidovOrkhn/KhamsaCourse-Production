@@ -9,8 +9,8 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
     {
         public int SectorId { get; set; }
         public string Name { get; set; }
-        public double Benefit { get; set; }
-        public double Cost { get; set; }
+        public decimal Benefit { get; set; }
+        public decimal Cost { get; set; }
         public string CategoryName { get; set; }
     }
 }
