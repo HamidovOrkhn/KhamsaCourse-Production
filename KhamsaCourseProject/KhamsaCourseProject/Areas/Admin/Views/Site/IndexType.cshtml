@@ -1,0 +1,39 @@
+﻿@model IEnumerable<KhamsaCourseProject.Areas.Admin.Models.StudentType>
+
+@{
+    ViewData["Title"] = "StudentType";
+}
+
+<p>
+    <a asp-action="CreateType">Yeni</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Sıra nömrəsi
+            </th>
+            <th>
+                Adı
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Düzəliş", "EditType", new { id = item.Id }) |
+                    @Html.ActionLink("Sil", "DeleteType", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

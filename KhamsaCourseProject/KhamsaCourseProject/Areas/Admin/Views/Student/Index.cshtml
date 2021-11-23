@@ -38,6 +38,7 @@
                             <th scope="col">Ödəniş Tarixi</th>
                             <th scope="col">Dəyər</th>
                             <th scope="col">Müqavilə Dəyəri</th>
+                            <th >Əməliyyat</th>
                         </tr>
                     </thead>
                     <tbody class="content-payment">
@@ -87,7 +88,7 @@
                         </div>
                         <div class="col-2">
                             <select name="StudentGroups" class="form-control">
-                                <option value="">Qrup</option>
+                                <option value="">Blok</option>
                                 @foreach (var item in Model.StudentGroups)
                                 {
                                     int value = 0;
@@ -183,7 +184,7 @@
                 Sinif
             </th>
             <th>
-                Qrup
+                Blok
             </th>
             <th>
                 Ev Telefonu
@@ -191,7 +192,7 @@
             <th>
                 Mobil Telefonu
             </th>
-            <th style="width:125px !important">
+            <th>
                 Qeydiyyat Tarixi
             </th>
             <th>
@@ -202,6 +203,9 @@
             </th>
             <th>
                 Ümumi Borc
+            </th>
+            <th>
+                Status
             </th>
             <th>
                 Prosesslər
@@ -259,15 +263,26 @@
                     {
                         <td>Yoxdur</td>
                     }
+                    @if (item.Contract is object)
+                    {
+                        @if (item.Contract.Debt > item.Contract.Value)
+                        {
+                            <td><i class="fas fa-circle" style="color:red"></i></td>
+                        }
+                        else
+                        {
+                            <td><i class="fas fa-circle" style="color:green"></i></td>
+                        }
+                    }
                     @if (item.IsActive == 1)
                     {
-                <td>
-                    <a asp-action="Edit" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a> |
-                    <a href="#" data-url="@Url.Action("Details","Student",new { id = item.Id })" class="get-details" title="Detallar"><img src="~/admin/img/info--v4.gif" width="20px" alt="Detallar" /></a> |
-                    <a asp-action="Delete" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>
-                    <a asp-action="ÖdəPayContract" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Ödəniş et"><img src="~/admin/img/payment.jpg" width="25px" alt="odenis" /></a> |
-                    <a asp-action="Deactivate" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Arxivlə"><img src="~/admin/img/archive.png" width="20px" alt="Arxivle" /></a>
-                </td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id">Düzəliş</a> |
+                            <a href="#" data-url="@Url.Action("Details","Student",new { id = item.Id })" class="get-details">Detallar</a> |
+                            @Html.ActionLink("Sil", "Delete", new { id = item.Id }) |
+                            @Html.ActionLink("Ödəniş", "PayContract", new { id = item.Id }) |
+                            <a asp-action="Deactivate" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id">Arxivlə</a>
+                        </td>
                     }
                     else
                     {
@@ -330,6 +345,7 @@
             }
         });
         var url = "";
+        var checkUrl = "@Url.Action("GetCheck","Student")"
         $(".get-details").click(function (e) {
             e.preventDefault();
             url = $(this).attr('data-url');
@@ -340,10 +356,12 @@
                 var str = [];
 
                 for (var i = 0; i < data.payments.length; i++) {
+                    checkUrl += `/${data.payments[i].id}`;
                     var ltr = `<tr>
-                                          <th scope="row">${data.payments[i].paymentDate}</th>
-                                          <td>${data.payments[i].value} AZN</td>
-                                          <td>${data.payments[i].contractValue} AZN</td>`;
+                                              <th scope="row">${data.payments[i].paymentDate}</th>
+                                              <td>${data.payments[i].value} AZN</td>
+                                              <td>${data.payments[i].contractValue} AZN</td>
+                                              <td><a href='${checkUrl}' class='btn btn-success'>Çek</a></td>`;;
 
                     ltr += `</tr>`;
                     str.push(ltr);
@@ -361,10 +379,13 @@
                 var str = [];
 
                 for (var i = 0; i < data.payments.length; i++) {
+                    checkUrl += `/${data.payments[i].id}`;
                     var ltr = `<tr>
-                                          <th scope="row">${data.payments[i].paymentDate}</th>
-                                          <td>${data.payments[i].value} AZN</td>
-                                          <td>${data.payments[i].contractValue} AZN</td>`;
+                                              <th scope="row">${data.payments[i].paymentDate}</th>
+                                              <td>${data.payments[i].value} AZN</td>
+                                              <td>${data.payments[i].contractValue} AZN</td>
+                                              <td><a href='${checkUrl}' class='btn btn-success'>Çek</a></td>`;
+
 
                     ltr += `</tr>`;
                     str.push(ltr);

@@ -21,7 +21,19 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.Sectors.Where(a=>a.IsActive == 1).ToList());
+            int id = Convert.ToInt32(HttpContext.Request.Cookies["uid"]);
+            List<Sector> sectors = (from role in _context.Roles.Where(a=>a.UserId == id && a.TypeId == 1)
+                                   join sector in _context.Sectors.Where(a => a.IsActive == 1) on role.ActivityId equals sector.Id
+                                   select new Sector
+                                   {
+                                       Email = sector.Email,
+                                       Fax = sector.Fax,
+                                       Name = sector.Name,
+                                       Phone = sector.Phone,
+                                       Id = sector.Id,
+                                       IsActive = sector.IsActive
+                                   }).ToList();
+            return View(sectors);
         }
         public IActionResult Details(int id)
         {

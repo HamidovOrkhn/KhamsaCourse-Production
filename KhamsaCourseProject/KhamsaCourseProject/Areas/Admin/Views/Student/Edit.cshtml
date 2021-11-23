@@ -4,11 +4,12 @@
     ViewData["Title"] = "Məlumatları Dəyiş";
 }
 
-<h1>Tələbə düzəlişi</h1>
+<h1>Dəyiş</h1>
 
+<h4>Tələbə</h4>
 <hr />
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-8">
         <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -39,7 +40,7 @@
                 <span asp-validation-for="StudentClassId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StudentGroupId" class="control-label">Qrup</label>
+                <label asp-for="StudentGroupId" class="control-label">Blok</label>
                 <select asp-for="StudentGroupId" class="form-control">
                     @foreach (var item in Model.StudentGroups)
                     {
@@ -61,7 +62,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="RegistrationDate" class="control-label">Qeydiyyat Tarixi</label>
-                <input type="date" asp-for="RegistrationDate" class="form-control" />
+                <input asp-for="RegistrationDate" class="form-control" />
                 <span asp-validation-for="RegistrationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -90,11 +91,11 @@
                         </select>
                         <span asp-validation-for="ContractType" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label asp-for="ContractDate" class="control-label">Müqavilə Tarixi</label>
                         <input asp-for="ContractDate" class="form-control" />
                         <span asp-validation-for="ContractDate" class="text-danger"></span>
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         <label asp-for="Value" class="control-label">Ödəmə Miqdarı</label>
                         <input asp-for="Value" class="form-control" />

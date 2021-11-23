@@ -10,7 +10,7 @@ namespace KhamsaCourseProject.Areas.Admin.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Benefit { get; set; }
+        public double Benefit { get; set; }
         public string Description { get; set; }
         public DateTime BenefitDate { get; set; }
         public int SectorId { get; set; }

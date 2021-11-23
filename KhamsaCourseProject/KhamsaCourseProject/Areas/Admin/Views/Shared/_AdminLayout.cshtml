@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     List<Role> roles = new List<Role>();
     User user = new User();
     if (ViewData["User-Roles"] is object)
@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="~/admin/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="~/admin/img/favicon.ico">
+    <!-- Fonts Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -66,7 +68,7 @@
                         <!-- Navbar Menu -->
                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                             <!-- Logout    -->
-                            <li class="nav-item"><a style="cursor:pointer" class="nav-link logout" data-toggle="modal" data-target="#logoutModal"> <span class="d-none d-sm-inline">Çıxış et</span><i class="fa fa-sign-out"></i></a></li>
+                            <li class="nav-item"><a style="cursor:pointer" class="nav-link logout" data-toggle="modal" data-target="#logoutModal"> <span class="d-none d-sm-inline">Çıxış et</span><i class="fas fa-sign-in-alt"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -84,18 +86,40 @@
                     </div>
                 </div>
                 <!-- Sidebar Navidation Menus--><span class="heading">Prosesslər</span>
-                <ul class="list-unstyled">
-                    <li><a asp-action="Index" asp-controller="Home" asp-area="Admin"> <i class="icon-home"></i>Ana Səhifə</a></li>
-                    <li><a asp-action="Index" asp-controller="Sector"> <i class="icon-grid"></i>Filiallar</a></li>
-                    <li><a asp-action="Index" asp-controller="Statistics" > <i class="fa fa-bar-chart"></i>Statistikalar </a></li>
-                    <li>
-                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>İstifadəçilər</a>
-                        <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                            <li><a asp-action="Index" asp-controller="User" asp-area="Admin">Siyahı</a></li>
-                            <li><a asp-action="Create" asp-controller="User" asp-area="Admin">Qeydiyyat</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                                                <ul class="list-unstyled">
+                                                    <li><a asp-action="Index" asp-controller="Home" asp-area="Admin"> <i class="icon-home"></i>Ana Səhifə</a></li>
+                                                    <li><a asp-action="Index" asp-controller="Sector"> <i class="icon-grid"></i>Filiallar</a></li>
+                                                    @if (roles.Any(a => a.ActivityId == 1 && a.TypeId == 2))
+                                                    {
+                                                <li><a asp-action="Index" asp-controller="Statistics"> <i class="fa fa-bar-chart"></i>Statistikalar</a></li>}
+                                                    @if (roles.Any(a => a.ActivityId == 3 && a.TypeId == 2) || roles.Any(a => a.ActivityId == 2 && a.TypeId == 2))
+                                                    {
+                                                <li>
+                                                    <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>İstifadəçilər</a>
+                                                    <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                                                        @if (roles.Any(a => a.ActivityId == 3 && a.TypeId == 2))
+                                                        {
+                                                <li><a asp-action="Index" asp-controller="User" asp-area="Admin">Siyahı</a></li>}
+                                                        @if (roles.Any(a => a.ActivityId == 2 && a.TypeId == 2))
+                                                        {
+                                                <li><a asp-action="Create" asp-controller="User" asp-area="Admin">Qeydiyyat</a></li>}
+
+                                                    </ul>
+                                                </li>}
+                                                    @if (roles.Any(a => a.ActivityId == 5 && a.TypeId == 2))
+                                                    {
+                                                <li>
+                                                    <a href="#exampledropdownDropdowntype" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-pen"></i>Sistem Idarəsi</a>
+                                                    <ul id="exampledropdownDropdowntype" class="collapse list-unstyled ">
+                                                        <li><a asp-action="IndexType" asp-controller="Site" asp-area="Admin">Tələbə Tipləri</a></li>
+                                                        <li><a asp-action="IndexClass" asp-controller="Site" asp-area="Admin">Tələbə Sinifləri</a></li>
+                                                        <li><a asp-action="IndexGroup" asp-controller="Site" asp-area="Admin">Tələbə Blokları</a></li>
+
+                                                    </ul>
+                                                </li>}
+
+
+                                                </ul>
             </nav>
             <div class="content-inner">
                 <!-- Page Header-->

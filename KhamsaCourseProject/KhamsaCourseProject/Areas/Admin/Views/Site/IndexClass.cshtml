@@ -1,0 +1,38 @@
+﻿@model IEnumerable<KhamsaCourseProject.Areas.Admin.Models.StudentClass>
+
+@{
+    ViewData["Title"] = "IndexClass";
+}
+
+<p>
+    <a asp-action="CreateClass">Yeni</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Sıra nömrəsi
+            </th>
+            <th>
+                Adı
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Düzəliş", "EditClass", new { id=item.Id}) |
+                @Html.ActionLink("Sil", "DeleteClass", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

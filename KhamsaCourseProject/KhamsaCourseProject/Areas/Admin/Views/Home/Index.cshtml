@@ -1,1 +1,27 @@
-﻿<h1>Hello World</h1>
+﻿@model List<HomeDto>
+@{
+    ViewData["Title"] = "Ana Səhifə";
+    Random rnd = new Random();
+    string[] colors = { "bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-dark", "bg-muted" };
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <div class="card @(colors[rnd.Next(0, 7)]) text-white">
+                <div class="card-body text-center">
+                    <figure class="avatar mb-3 border-0">
+                        <span class="avatar-title bg-white text-primary rounded-circle">
+                        </span>
+                    </figure>
+                    <h2 class="font-weight-bold mb-3">Tələbə Sayı : @item.StudentCount</h2>
+                    <h5 class="mb-0">@item.SectorName</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
