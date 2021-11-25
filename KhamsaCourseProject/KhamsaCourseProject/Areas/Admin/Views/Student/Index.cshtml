@@ -217,81 +217,81 @@
         {
             @foreach (var item in Model.Students)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fullname)
-                    </td>
-                    <td>
-                        @item.StudentType.Name
-                    </td>
-                    <td>
-                        @item.StudentClass.Name
-                    </td>
-                    <td>
-                        @item.StudentGroup.Name
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HomeNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MobileNumber)
-                    </td>
-                    <td>
-                        @item.RegistrationDate.ToShortDateString()
-                    </td>
-                    <td>
-                        @item.Sector.Name
-                    </td>
-                    @if (item.Contract is object)
-                    {
-                        <td>@item.Contract.Value</td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                @item.StudentType.Name
+            </td>
+            <td>
+                @item.StudentClass.Name
+            </td>
+            <td>
+                @item.StudentGroup.Name
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td>
+                @item.RegistrationDate.ToShortDateString()
+            </td>
+            <td>
+                @item.Sector.Name
+            </td>
+            @if (item.Contract is object)
+            {
+                <td>@item.Contract.Value</td>
 
-                    }
-                    else
-                    {
-                        <td>Yoxdur</td>
-                    }
-                    @if (item.Contract is object)
-                    {
-                        <td>@item.Contract.Debt</td>
+            }
+            else
+            {
+                <td>Yoxdur</td>
+            }
+            @if (item.Contract is object)
+            {
+                <td>@item.Contract.Debt</td>
 
-                    }
-                    else
-                    {
-                        <td>Yoxdur</td>
-                    }
-                    @if (item.Contract is object)
-                    {
-                        @if (item.Contract.Debt > item.Contract.Value)
-                        {
-                            <td><i class="fas fa-circle" style="color:red"></i></td>
-                        }
-                        else
-                        {
-                            <td><i class="fas fa-circle" style="color:green"></i></td>
-                        }
-                    }
-                    @if (item.IsActive == 1)
-                    {
-                        <td>
-                            <a asp-action="Edit" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id">Düzəliş</a> |
-                            <a href="#" data-url="@Url.Action("Details","Student",new { id = item.Id })" class="get-details">Detallar</a> |
-                            @Html.ActionLink("Sil", "Delete", new { id = item.Id }) |
-                            @Html.ActionLink("Ödəniş", "PayContract", new { id = item.Id }) |
-                            <a asp-action="Deactivate" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id">Arxivlə</a>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <a asp-action="Activate" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id">Aktivləşdir</a>
-                        </td>
+            }
+            else
+            {
+                <td>Yoxdur</td>
+            }
+            @if (item.Contract is object)
+            {
+                @if (item.Contract.Debt > item.Contract.Value)
+                {
+                    <td><i class="fas fa-circle" style="color:red"></i></td>
+                }
+                else
+                {
+                    <td><i class="fas fa-circle" style="color:green"></i></td>
+                }
+            }
+            @if (item.IsActive == 1)
+            {
+                <td>
+                    <a asp-action="Edit" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a> |
+                    <a href="#" data-url="@Url.Action("Details","Student",new { id = item.Id })" class="get-details" title="Detallar"><img src="~/admin/img/info--v4.gif" width="20px" alt="Detallar" /></a> |
+                    <a asp-action="Delete" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>
+                    <a asp-action="ÖdəPayContract" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Ödəniş et"><img src="~/admin/img/payment.jpg" width="25px" alt="odenis" /></a> |
+                    <a asp-action="Deactivate" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id" title="Arxivlə"><img src="~/admin/img/archive.png" width="20px" alt="Arxivle" /></a>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <a asp-action="Activate" asp-controller="Student" asp-area="Admin" asp-route-id="@item.Id">Aktivləşdir</a>
+                </td>
 
-                    }
-                </tr>
+            }
+        </tr>
             }
         }
     </tbody>
