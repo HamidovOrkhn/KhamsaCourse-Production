@@ -48,6 +48,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             data = (data).Skip(page * 10).Take(10).ToList();
 
             model.Students = data;
+            model.StudentCount = _db.Students.Count();
             model.Pagination = ExConverter.PaginationMethod(page, count);
 
             return View(model);

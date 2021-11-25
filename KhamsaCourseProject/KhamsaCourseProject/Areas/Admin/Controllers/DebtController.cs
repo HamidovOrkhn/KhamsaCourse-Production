@@ -1,5 +1,4 @@
-﻿
-using KhamsaCourseProject.Areas.Admin.Data;
+﻿using KhamsaCourseProject.Areas.Admin.Data;
 using KhamsaCourseProject.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
