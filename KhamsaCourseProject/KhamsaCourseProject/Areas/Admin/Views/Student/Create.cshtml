@@ -40,6 +40,17 @@
                 <span asp-validation-for="StudentClassId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="StudentLessonSectorId" class="control-label">Sektor</label>
+                <select asp-for="StudentLessonSectorId" class="form-control">
+                    @foreach (var item in Model.StudentLessonSectors)
+                    {
+                        <option value=@item.Id>@item.Name</option>
+                    }
+
+                </select>
+                <span asp-validation-for="StudentLessonSectorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="StudentGroupId" class="control-label">Blok</label>
                 <select asp-for="StudentGroupId" class="form-control">
                     @foreach (var item in Model.StudentGroups)
@@ -62,7 +73,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="RegistrationDate" class="control-label">Qeydiyyat Tarixi</label>
-                <input asp-for="RegistrationDate" type="date" class="form-control" />
+                <input type="date" asp-for="RegistrationDate" type="date" class="form-control" />
                 <span asp-validation-for="RegistrationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -92,10 +103,10 @@
                         <span asp-validation-for="ContractType" class="text-danger"></span>
                     </div>
                     @*<div class="form-group">
-                        <label asp-for="ContractDate" class="control-label">Müqavilə Tarixi</label>
-                        <input asp-for="ContractDate" class="form-control" />
-                        <span asp-validation-for="ContractDate" class="text-danger"></span>
-                    </div>*@
+                    <label asp-for="ContractDate" class="control-label">Müqavilə Tarixi</label>
+                    <input asp-for="ContractDate" class="form-control" />
+                    <span asp-validation-for="ContractDate" class="text-danger"></span>
+                </div>*@
                     <div class="form-group">
                         <label asp-for="Value" class="control-label">Ödəmə Miqdarı</label>
                         <input asp-for="Value" class="form-control" />

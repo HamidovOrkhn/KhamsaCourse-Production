@@ -13,6 +13,7 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
         public List<StudentClass> StudentClasses { get; set; }
         public List<StudentGroup> StudentGroups { get; set; }
         public List<StudentType> StudentTypes { get; set; }
+        public List<StudentLessonSector> StudentLessonSectors { get; set; }
         public List<ContractType> ContractTypes { get; set; }
         public int ContractType { get; set; }
         public DateTime ContractDate { get; set; }

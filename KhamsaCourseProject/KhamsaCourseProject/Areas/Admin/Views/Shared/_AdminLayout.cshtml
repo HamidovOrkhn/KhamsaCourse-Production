@@ -92,6 +92,9 @@
                                                     @if (roles.Any(a => a.ActivityId == 1 && a.TypeId == 2))
                                                     {
                                                 <li><a asp-action="Index" asp-controller="Statistics"> <i class="fa fa-bar-chart"></i>Statistikalar</a></li>}
+                                                    @if (roles.Any(a => a.ActivityId == 6 && a.TypeId == 2))
+                                                    {
+                                                <li><a asp-action="Checks" asp-controller="Statistics" asp-area="Admin"> <i class="fas fa-file-alt"></i>Çeklər</a></li>}
                                                     @if (roles.Any(a => a.ActivityId == 3 && a.TypeId == 2) || roles.Any(a => a.ActivityId == 2 && a.TypeId == 2))
                                                     {
                                                 <li>
@@ -114,11 +117,9 @@
                                                         <li><a asp-action="IndexType" asp-controller="Site" asp-area="Admin">Tələbə Tipləri</a></li>
                                                         <li><a asp-action="IndexClass" asp-controller="Site" asp-area="Admin">Tələbə Sinifləri</a></li>
                                                         <li><a asp-action="IndexGroup" asp-controller="Site" asp-area="Admin">Tələbə Blokları</a></li>
-
+                                                        <li><a asp-action="IndexLessonSector" asp-controller="Site" asp-area="Admin">Tələbə Sektoru</a></li>
                                                     </ul>
                                                 </li>}
-
-
                                                 </ul>
             </nav>
             <div class="content-inner">
@@ -189,7 +190,7 @@
 
     <!-- Page level plugins -->
     <script src="~/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    @*<script src="~/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>*@
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -201,6 +202,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Page level custom scripts -->
     <script src="~/admin/js/demo/datatables-demo.js"></script>
+    <script src="~/vendor/Chart.js/chart.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 

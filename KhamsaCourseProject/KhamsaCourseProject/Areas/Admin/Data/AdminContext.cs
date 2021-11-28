@@ -17,6 +17,8 @@ namespace KhamsaCourseProject.Areas.Admin.Data
         public DbSet<StudentClass> StudentClasses { get; set; }
         public DbSet<StudentGroup> StudentGroups { get; set; }
         public DbSet<StudentType> StudentTypes { get; set; }
+        public DbSet<Check> Checks { get; set; }
+        public DbSet<StudentLessonSector> StudentLessonSectors { get; set; }
         public DbSet<StudentPayment> Payments { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<PaymentCategory> PaymentCategories { get; set; }

@@ -5,10 +5,10 @@
 }
 
 <p>
-    <a asp-action="CreateGroup">Yeni</a>
+    <a class="btn btn-primary" asp-action="CreateGroup">Yeni</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-bordered">
+    <thead style="background-color:cornflowerblue;color:white;">
         <tr>
             <th>
                 Sıra nömrəsi
@@ -30,8 +30,8 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Düzəliş", "EditGroup", new { id = item.Id }) |
-                    @Html.ActionLink("Sil", "DeleteGroup", new { id = item.Id })
+                    <a asp-action="EditGroup" asp-controller="Site" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a> |
+                    <a asp-action="DeleteGroup" asp-controller="Site" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>
                 </td>
             </tr>
         }

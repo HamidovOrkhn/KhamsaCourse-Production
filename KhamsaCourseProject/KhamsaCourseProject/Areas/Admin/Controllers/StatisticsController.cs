@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KhamsaCourseProject.Areas.Admin.Filters;
 using static KhamsaCourseProject.Areas.Admin.Helpers.Enums.AuthRole;
+using KhamsaCourseProject.Areas.Admin.Models;
 
 namespace KhamsaCourseProject.Areas.Admin.Controllers
 {
@@ -45,6 +46,26 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
 
             model.Categories = _db.PaymentCategories.ToList();
 
+            return View(model);
+        }
+        public IActionResult Checks(int categoryId = 10)
+        {
+            CheckIndexDto model = new CheckIndexDto();
+            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            if (categoryId == 10)
+            {
+                List<StudentPayment> payments = _db.Payments.Where(a => a.CategoryId == categoryId && a.PaymentDate >= date).ToList();
+                model.Payments = payments;
+            }
+            if (categoryId == 5)
+            {
+                List<Office> payments = _db.Offices.Where(a => a.CostDate >= date).ToList();
+                model.OfficePayments = payments;
+            }
+            
+            List<Check> checks = _db.Checks.Where(a => a.CategoryId == categoryId && a.PaymentDate >= date).ToList();
+            model.Checks = checks;
+            
             return View(model);
         }
     }

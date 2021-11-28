@@ -4,7 +4,24 @@
     Random rnd = new Random();
     string[] colors = { "bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-dark", "bg-muted" };
 }
-
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header"><h4>Tələbə Sayı</h4></div>
+            <div class="card-body">
+                <canvas id="monthly-linechart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header"><h4>Ofis Proessləri</h4></div>
+            <div class="card-body">
+                <canvas id="monthly-linechart-office"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     @foreach (var item in Model)
     {
@@ -22,6 +39,93 @@
         </div>
     }
 </div>
+@section Scripts{ 
+    <script>
+    $(document).ready(function () {
+
+        $.get("@Url.Action("StudentCounts", "Home",new { Area="Admin"})", function (data) {
+            ShowLineChart('monthly-linechart', data, '#28a745')
+        })
+        $.get("@Url.Action("OfficeCounts", "Home",new { Area="Admin"})", function (data) {
+            ShowLineChart('monthly-linechart-office', data, '#2196f3')
+        })
+        function ShowLineChart(selectorD, data, color) {
+            var ctx = document.getElementById(selectorD).getContext('2d');
+
+        var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+        gradientStroke.addColorStop(0, '#80b6f4');
+        gradientStroke.addColorStop(1, '#f49080');
+
+        var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
+        gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.6)");
+        gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.6)");
+
+        var labels = [];
+        var total = [];
+
+        for (let i = 0; i < data.length; i++) {
+            total.push(data[i].total);
+            labels.push(data[i].month);
+        }
+        //console.log(labels)
+        //console.log(qahalistatics)
+        //console.log(ahalistatics)
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sayı',
+                    data: total,
+                    fill: false,
+                    borderColor: color,
+                    backgroundColor: color,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    position: "bottom"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: "rgba(0,0,0,0.5)",
+                            fontStyle: "bold",
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
+                            padding: 20
+                        },
+                        gridLines: {
+                            drawTicks: false,
+                            display: false
+                        }
+
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            zeroLineColor: "transparent"
+                        },
+                        ticks: {
+                            padding: 20,
+                            fontColor: "rgba(0,0,0,0.5)",
+                            fontStyle: "bold"
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    })
+
+
+    function numberWithCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    }
+    </script>
+}
 
 
 

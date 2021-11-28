@@ -31,6 +31,31 @@ namespace KhamsaCourseProject.Migrations
                     b.ToTable("Activities");
                 });
 
+            modelBuilder.Entity("KhamsaCourseProject.Areas.Admin.Models.Check", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CheckDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("PaymentId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Checks");
+                });
+
             modelBuilder.Entity("KhamsaCourseProject.Areas.Admin.Models.ContractType", b =>
                 {
                     b.Property<int>("Id")
@@ -406,6 +431,9 @@ namespace KhamsaCourseProject.Migrations
                     b.Property<int>("StudentGroupId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StudentLessonSectorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentTypeId")
                         .HasColumnType("int");
 
@@ -416,6 +444,8 @@ namespace KhamsaCourseProject.Migrations
                     b.HasIndex("StudentClassId");
 
                     b.HasIndex("StudentGroupId");
+
+                    b.HasIndex("StudentLessonSectorId");
 
                     b.HasIndex("StudentTypeId");
 
@@ -482,6 +512,20 @@ namespace KhamsaCourseProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("StudentGroups");
+                });
+
+            modelBuilder.Entity("KhamsaCourseProject.Areas.Admin.Models.StudentLessonSector", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StudentLessonSectors");
                 });
 
             modelBuilder.Entity("KhamsaCourseProject.Areas.Admin.Models.StudentPayment", b =>
@@ -579,6 +623,15 @@ namespace KhamsaCourseProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("KhamsaCourseProject.Areas.Admin.Models.Check", b =>
+                {
+                    b.HasOne("KhamsaCourseProject.Areas.Admin.Models.PaymentCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("KhamsaCourseProject.Areas.Admin.Models.Debt", b =>
@@ -691,6 +744,12 @@ namespace KhamsaCourseProject.Migrations
                     b.HasOne("KhamsaCourseProject.Areas.Admin.Models.StudentGroup", "StudentGroup")
                         .WithMany("Students")
                         .HasForeignKey("StudentGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KhamsaCourseProject.Areas.Admin.Models.StudentLessonSector", "StudentLessonSector")
+                        .WithMany("Students")
+                        .HasForeignKey("StudentLessonSectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

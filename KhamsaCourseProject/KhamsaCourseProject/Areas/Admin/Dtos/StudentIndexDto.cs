@@ -13,6 +13,7 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
         public List<StudentClass> StudentClasses { get; set; }
         public List<StudentGroup> StudentGroups { get; set; }
         public List<StudentType> StudentTypes { get; set; }
+        public List<StudentLessonSector> StudentLessonSectors { get; set; }
         public int StudentCount { get; internal set; }
     }
 }

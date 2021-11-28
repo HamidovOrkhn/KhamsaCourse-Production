@@ -1,7 +1,11 @@
-﻿@model CheckDto 
-@{
-    Layout = "";
-}
+﻿@model CheckDto
+@{ Layout = ""; }
+@{ User user = new User();
+
+                if (ViewData["User-Data"] is object)
+                {
+                    user = ViewData["User-Data"] as User;
+                } }
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,56 +13,104 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="~/admin/vendor/bootstrap/css/bootstrap.min.css">
 </head>
-<body>
-    <div class="container justify-content-center p-4">
-        <div class="row justify-content-center">
-            <div class="col-4 justify-content-center m-4 border border-dark">
-                <h4 class="text-center mt-4">Əməliyyat Çeki</h4>
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th scope="row">Ad, Soyad</th>
-                            <td>@Model.Student.Fullname</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Müəssisənin Adı</th>
-                            <td>Xəmsə Kursları</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Filial</th>
-                            <td>@Model.Sector.Name</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Ödəniş Tipi</th>
-                            <td>Tələbə Ödənişi</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Məbləğ</th>
-                            <td>@Model.Payment.Value</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Qalan Borc</th>
-                            <td>@Model.Contract.Debt</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Ödəniş Tarixi</th>
-                            <td>@Model.Payment.PaymentDate</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Müqavilə Tarixi</th>
-                            <td>@Model.Contract.ContractDate</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Şagirdin Qeydiyyat Tarixi</th>
-                            <td>@Model.Student.RegistrationDate</td>
-                        </tr>
-                    </tbody>
-                </table>
+<body class="body-tx">
+    <div class="container justify-content-center p-4 mb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-4"><b>Kassa Mədaxil Orderinin Qəbzi</b></div>
+            <div class="col-4"><b>Tarix </b>@Model.Payment.PaymentDate.ToShortDateString()</div>
+            <div class="col-4"><b>No :</b> @Model.Payment.Id</div>
+        </div>
+        <div class="row justify-content-center mb-3">
+            <div class="col-3"><b>Kimdən </b></div>
+            <div class="col-4 text-center"><p style="border-bottom:solid 1px black;"><i>@Model.Student.Fullname</i></p></div>
+            <div class="col-1"><b>Məbləğ </b></div>
+            <div class="col-4 text-center"> <p style="border:solid 1px black;" class="p-2">@Model.Payment.Value AZN</p></div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-3"><b>Nə üçün </b></div>
+            <div class="col-4 text-center"><p style="border-bottom:solid 1px black;"><i>Kurs Hazırlığı</i></p></div>
+            <div class="col-1"></div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-3"><b>Məbləğ yazı ilə </b></div>
+            <div class="col-4 text-center"><p style="border-bottom:solid 1px black;"></p></div>
+            <div class="col-1"></div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-6">
+                <b>M.Y</b>
+            </div>
+            <div class="col-6">
+                <div class="row mb-3">
+                    <div class="col-6"><b>Rəhbər</b></div>
+                    <div class="col-6"><p style="border-bottom:solid 1px black;"></p></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6"><b>Baş Mühasib</b></div>
+                    <div class="col-6"><p style="border-bottom:solid 1px black;"></p></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6"><b>Qəbul edən</b></div>
+                    <div class="col-6"><p style="border-bottom:solid 1px black;"><i>@user.Name @user.Surname</i></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container justify-content-center p-4 mb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-4"><b>Kassa Mədaxil Orderinin Qəbzi</b></div>
+            <div class="col-4"><b>Tarix </b>@Model.Payment.PaymentDate.ToShortDateString()</div>
+            <div class="col-4"><b>No :</b> @Model.Payment.Id</div>
+        </div>
+        <div class="row justify-content-center mb-3">
+            <div class="col-3"><b>Kimdən </b></div>
+            <div class="col-4 text-center"><p style="border-bottom:solid 1px black;"><i>@Model.Student.Fullname</i></p></div>
+            <div class="col-1"><b>Məbləğ </b></div>
+            <div class="col-4 text-center"> <p style="border:solid 1px black;" class="p-2">@Model.Payment.Value AZN</p></div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-3"><b>Nə üçün </b></div>
+            <div class="col-4 text-center"><p style="border-bottom:solid 1px black;"><i>Kurs Hazırlığı</i></p></div>
+            <div class="col-1"></div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-3"><b>Məbləğ yazı ilə </b></div>
+            <div class="col-4 text-center"><p style="border-bottom:solid 1px black;"></p></div>
+            <div class="col-1"></div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-6">
+                <b>M.Y</b>
+            </div>
+            <div class="col-6">
+                <div class="row mb-3">
+                    <div class="col-6"><b>Rəhbər</b></div>
+                    <div class="col-6"><p style="border-bottom:solid 1px black;"></p></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6"><b>Baş Mühasib</b></div>
+                    <div class="col-6"><p style="border-bottom:solid 1px black;"></p></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6"><b>Qəbul edən</b></div>
+                    <div class="col-6 text-center"><p style="border-bottom:solid 1px black;"><i>@user.Name @user.Surname</i></p></div>
+                </div>
             </div>
         </div>
     </div>
     <script>
         window.print();
+
+    </script>
+    <script src="~/admin/vendor/jquery/jquery.min.js"></script>
+    <script>
+        $(".body-tx").click(function () {
+            window.location.replace("@Url.Action("Index","Student", new { Area = "Admin", id = Model.Sector.Id })")
+        })
     </script>
 </body>
 </html>

@@ -30,7 +30,9 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             [FromQuery] int StudentClasses = 0,
             [FromQuery] int StudentGroups = 0,
             [FromQuery] int StudentTypes = 0,
-            [FromQuery] int Status = 0
+            [FromQuery] int Status = 0,
+            [FromQuery] int PayMonth = 0,
+            [FromQuery] int StudentLessonSector = 0
             )
         {
             StudentIndexDto model = new StudentIndexDto();
@@ -38,8 +40,8 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             model.StudentGroups = _db.StudentGroups.ToList();
             model.StudentClasses = _db.StudentClasses.ToList();
             model.StudentTypes = _db.StudentTypes.ToList();
-
-            List<Student> data = ExConverter.Filterize(_db, Fullname, id ,StudentClasses, StudentGroups, StudentTypes, Status);
+            model.StudentLessonSectors = _db.StudentLessonSectors.ToList();
+            List<Student> data = ExConverter.Filterize(_db, Fullname, id ,StudentClasses, StudentGroups, StudentTypes, Status, PayMonth, StudentLessonSector).OrderBy(a=>a.RegistrationDate).ToList();
 
             float pagecount = data.Count;
 
@@ -72,14 +74,16 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             model.StudentClassId = student.StudentClassId;
             model.StudentGroupId = student.StudentGroupId;
             model.StudentTypeId = student.StudentTypeId;
+            model.StudentLessonSectorId = student.StudentLessonSectorId;
             model.ContractType = contract.ContractTypeId;
-            model.ContractDate = contract.ContractDate;
+            model.ContractDate = student.RegistrationDate;
             model.ContractId = contract.Id;
             model.Discount = (int)contract.Discount;
             model.Value = (int)contract.Value;
             model.StudentGroups = _db.StudentGroups.ToList();
             model.StudentClasses = _db.StudentClasses.ToList();
             model.StudentTypes = _db.StudentTypes.ToList();
+            model.StudentLessonSectors = _db.StudentLessonSectors.ToList();
             model.Sectors = _db.Sectors.Where(a => a.IsActive == 1).ToList();
             model.ContractTypes = _db.ContractTypes.ToList();
             model.Contract = contract;
@@ -113,6 +117,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             student.SectorId = request.SectorId;
             student.StudentClassId = request.StudentClassId;
             student.StudentGroupId = request.StudentGroupId;
+            student.StudentLessonSectorId = request.StudentLessonSectorId;
             student.StudentTypeId = request.StudentTypeId;
             contract.ContractTypeId = request.ContractType;
             contract.ContractDate = request.RegistrationDate;
@@ -147,6 +152,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             model.StudentGroups = _db.StudentGroups.ToList();
             model.StudentClasses = _db.StudentClasses.ToList();
             model.StudentTypes = _db.StudentTypes.ToList();
+            model.StudentLessonSectors = _db.StudentLessonSectors.ToList();
             model.Sectors = _db.Sectors.Where(a => a.IsActive == 1).ToList();
             model.ContractTypes = _db.ContractTypes.ToList();
 
@@ -165,7 +171,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
                 ContractTypeId = request.ContractType,
                 Discount = request.Value - discount,
                 Value = discount,
-                Debt = discount
+                Debt = 0
             };
             student.IsActive = 1;
             #endregion
@@ -241,6 +247,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
                 TempData["Student-Pay-Error"] = "Müqavilə tapılmadı";
                 return RedirectToAction("Index", new { id = student.SectorId });
             }
+            
             #region Mapping Specify
             contract.Debt = contract.Debt - payment.Value;
 
@@ -260,7 +267,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
 
             _db.SaveChanges();
 
-            return RedirectToAction("Index", new { id = student.SectorId });
+            return RedirectToAction("GetCheck", new { id = studentPayment.Id });
 
         }
         public IActionResult GetCheck(int id)
@@ -270,6 +277,12 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             Student student = _db.Students.Where(a => a.Id == payment.ProcessId).FirstOrDefault();
             if (payment is object && student is object)
             {
+                Check chck = _db.Checks.Where(a => a.PaymentId == payment.Id && a.CategoryId == payment.CategoryId).FirstOrDefault();
+                if (chck is null)
+                {
+                    _db.Checks.Add(new Check { CategoryId = payment.CategoryId, CheckDate = DateTime.Now, PaymentId = payment.Id, PaymentDate = payment.PaymentDate });
+                    _db.SaveChanges();
+                }
                 model.Student = student;
                 model.Contract = _db.Contracts.Where(a => a.StudentId == payment.ProcessId).FirstOrDefault();
                 model.Payment = payment;

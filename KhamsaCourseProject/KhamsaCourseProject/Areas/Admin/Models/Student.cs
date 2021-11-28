@@ -18,6 +18,8 @@ namespace KhamsaCourseProject.Areas.Admin.Models
         public StudentClass StudentClass { get; set; }
         public int StudentGroupId { get; set; }
         public StudentGroup StudentGroup { get; set; }
+        public int StudentLessonSectorId { get; set; }
+        public StudentLessonSector StudentLessonSector { get; set; }
         public string HomeNumber { get; set; }
         public string MobileNumber { get; set; }
         public int IsActive { get; set; }

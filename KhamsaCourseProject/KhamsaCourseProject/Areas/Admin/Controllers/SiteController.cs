@@ -168,5 +168,55 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             return RedirectToAction("IndexType");
         }
         #endregion
+        #region StudentLessonSectors
+        public IActionResult IndexLessonSector()
+        {
+            return View(_db.StudentLessonSectors.ToList());
+        }
+        [HttpGet]
+        public IActionResult CreateLessonSector()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateLessonSector(StudentLessonSector request)
+        {
+            _db.StudentLessonSectors.Add(request);
+            _db.SaveChanges();
+            return RedirectToAction("IndexLessonSector");
+        }
+        [HttpGet]
+        public IActionResult EditLessonSector(int id)
+        {
+            StudentLessonSector dt = new StudentLessonSector();
+            if (dt is object)
+            {
+                dt = _db.StudentLessonSectors.Where(a => a.Id == id).FirstOrDefault();
+            }
+            return View(dt);
+        }
+        [HttpPost]
+        public IActionResult EditLessonSector(int id, StudentLessonSector request)
+        {
+            StudentLessonSector dt = _db.StudentLessonSectors.Where(a => a.Id == id).FirstOrDefault();
+            if (dt is object)
+            {
+                dt.Name = request.Name;
+                _db.SaveChanges();
+            }
+            return RedirectToAction("IndexLessonSector");
+        }
+        [HttpGet]
+        public IActionResult DeleteLessonSector(int id)
+        {
+            StudentLessonSector dt = _db.StudentLessonSectors.Where(a => a.Id == id).FirstOrDefault();
+            if (dt is object)
+            {
+                _db.StudentLessonSectors.Remove(dt);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("IndexLessonSector");
+        }
+        #endregion
     }
 }

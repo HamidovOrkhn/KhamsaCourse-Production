@@ -121,6 +121,8 @@ namespace KhamsaCourseProject.Areas.Admin.Helpers
                 db.Activities.Add(new Activity { Name = "İstifadəçi Qeydiyyatı" });
                 db.Activities.Add(new Activity { Name = "İstifadəçi Siyahısı" });
                 db.Activities.Add(new Activity { Name = "Filial Silmə" });
+                db.Activities.Add(new Activity { Name = "Sayt Idarəsi" });
+                db.Activities.Add(new Activity { Name = "Çeklər" });
             }
             else
             {
@@ -137,6 +139,7 @@ namespace KhamsaCourseProject.Areas.Admin.Helpers
             {
                 Console.WriteLine($"--> Data already exists context:{nameof(db.ContractTypes)}");
             }
+            db.SaveChanges();
             if (!db.Users.Any())
             {
                 List<Activity> activities = db.Activities.ToList();
@@ -176,6 +179,17 @@ namespace KhamsaCourseProject.Areas.Admin.Helpers
             else
             {
                 Console.WriteLine($"--> Data already exists context:{nameof(db.Users)}");
+            }
+            if (!db.StudentLessonSectors.Any())
+            {
+                db.StudentLessonSectors.AddRange(new List<StudentLessonSector>() {
+                    new StudentLessonSector { Name = "Az Sektor" },
+                    new StudentLessonSector { Name = "Rus Sektor"}
+                });
+            }
+            else
+            {
+                Console.WriteLine($"--> Data already exists context:{nameof(db.StudentLessonSectors)}");
             }
             db.SaveChanges();
         }

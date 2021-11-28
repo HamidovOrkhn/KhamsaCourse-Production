@@ -62,8 +62,8 @@
                 @Html.DisplayFor(modelItem => item.ExamDate)
             </td>
             <td>
-                @Html.ActionLink("Düzəliş", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                <a asp-action="Edit" asp-controller="Exam" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a> |
+                <a asp-action="Delete" asp-controller="Exam" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>
             </td>
         </tr>
 }

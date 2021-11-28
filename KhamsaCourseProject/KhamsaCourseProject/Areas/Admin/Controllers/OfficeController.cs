@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KhamsaCourseProject.Areas.Admin.Filters;
+using KhamsaCourseProject.Areas.Admin.Dtos;
+
 namespace KhamsaCourseProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -47,7 +49,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             exam.SectorId = id;
             _db.Offices.Add(exam);
             _db.SaveChanges();
-            _db.Payments.Add(new StudentPayment
+            StudentPayment payment = new StudentPayment
             {
                 CategoryId = 5,
                 Description = exam.Description,
@@ -56,9 +58,10 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
                 ProcessId = exam.Id,
                 Value = exam.Cost,
                 SectorId = id
-            });
+            };
+            _db.Payments.Add(payment);
             _db.SaveChanges();
-            return RedirectToAction("Index", new { Id = id });
+            return RedirectToAction("GetCheck", new { Id = exam.Id });
         }
         [HttpGet]
         public IActionResult Edit(int id)
@@ -94,6 +97,23 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
                 _db.SaveChanges();
             }
             return RedirectToAction("Index", new { Id = debt.SectorId });
+        }
+        public IActionResult GetCheck(int id)
+        {
+            CheckOfficeDto model = new CheckOfficeDto();
+            Office payment = _db.Offices.Where(a => a.Id == id).FirstOrDefault();
+            if (payment is object)
+            {
+                Check chck = _db.Checks.Where(a => a.PaymentId == payment.Id && a.CategoryId == 5).FirstOrDefault();
+                if (chck is null)
+                {
+                    _db.Checks.Add(new Check { CategoryId = 5, CheckDate = DateTime.Now, PaymentId = payment.Id, PaymentDate = payment.CostDate });
+                    _db.SaveChanges();
+                }
+                model.Payment = payment;
+                model.Sector = _db.Sectors.Where(a => a.Id == payment.SectorId).FirstOrDefault();
+            }
+            return View(model);
         }
     }
 }
