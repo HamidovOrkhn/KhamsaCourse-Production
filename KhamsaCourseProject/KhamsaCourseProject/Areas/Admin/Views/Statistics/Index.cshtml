@@ -75,10 +75,13 @@
                 Filial Adı
             </th>
             <th>
-                Ümumi Gəlir
+                Ümumi Dövriyə
             </th>
             <th>
                 Ümumi Xərc
+            </th>
+            <th>
+                Gəlir
             </th>
             <th>
                 Xərc Tipi
@@ -89,20 +92,23 @@
     <tbody>
         @foreach (var item in Model.Statistcs)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Benefit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Benefit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+               @(item.Benefit - item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

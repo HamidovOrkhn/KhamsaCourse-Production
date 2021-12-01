@@ -171,7 +171,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
                 ContractTypeId = request.ContractType,
                 Discount = request.Value - discount,
                 Value = discount,
-                Debt = 0
+                Debt = discount
             };
             student.IsActive = 1;
             #endregion

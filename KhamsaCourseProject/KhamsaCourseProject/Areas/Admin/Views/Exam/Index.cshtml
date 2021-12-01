@@ -32,16 +32,19 @@
     <thead style="background-color:cornflowerblue;color:white">
         <tr>
             <th>
-               Ad
+                Ad
             </th>
             <th>
-               Gəlir
+                Gəlir
             </th>
             <th>
                 Əlavə Məlumat
             </th>
             <th>
                 Tarix
+            </th>
+            <th>
+                Tələbə sayı
             </th>
             <th></th>
         </tr>
@@ -60,6 +63,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExamDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentCount)
             </td>
             <td>
                 <a asp-action="Edit" asp-controller="Exam" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a> |

@@ -12,6 +12,7 @@ namespace KhamsaCourseProject.Areas.Admin.Models
         public string Name { get; set; }
         public double Benefit { get; set; }
         public string Description { get; set; }
+        public int StudentCount { get; set; }
         public DateTime ExamDate { get; set; }
         public int SectorId { get; set; }
         public Sector Sector { get; set; }

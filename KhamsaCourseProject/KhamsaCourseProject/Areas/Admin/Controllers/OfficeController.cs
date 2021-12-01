@@ -61,7 +61,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             };
             _db.Payments.Add(payment);
             _db.SaveChanges();
-            return RedirectToAction("GetCheck", new { Id = exam.Id });
+            return RedirectToAction("Index", new { Id = id });
         }
         [HttpGet]
         public IActionResult Edit(int id)

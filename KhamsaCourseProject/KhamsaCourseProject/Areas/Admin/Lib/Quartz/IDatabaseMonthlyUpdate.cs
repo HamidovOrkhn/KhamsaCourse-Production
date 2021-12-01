@@ -8,6 +8,6 @@ namespace KhamsaCourseProject.Areas.Admin.Lib.Quartz
     interface IDatabaseMonthlyUpdate
     {
         Task UpdateDatabase();
-        Task UpdateEmployee();
+        //Task UpdateEmployee();
     }
 }

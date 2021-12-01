@@ -80,6 +80,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
                 debt.Benefit = request.Benefit;
                 debt.ExamDate = request.ExamDate;
                 debt.Description = request.Description;
+                debt.StudentCount = request.StudentCount;
                 _db.SaveChanges();
             }
             return RedirectToAction("Index", new { Id = debt.SectorId });

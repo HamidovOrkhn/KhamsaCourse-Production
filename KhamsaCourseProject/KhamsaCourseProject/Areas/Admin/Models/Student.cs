@@ -40,7 +40,7 @@ namespace KhamsaCourseProject.Areas.Admin.Models
                 RuleFor(a => a.StudentGroupId).NotNull().WithMessage("Sahəni doldurun");
                 RuleFor(a => a.RegistrationDate).NotNull().WithMessage("Sahəni doldurun");
                 RuleFor(a => a.Fullname).NotNull().WithMessage("Sahəni doldurun").MaximumLength(300).WithMessage("Şrift sayı 300 keçməməlidir");
-                RuleFor(a => a.HomeNumber).NotNull().WithMessage("Sahəni doldurun").MaximumLength(100).WithMessage("Şrift sayı 100 keçməməlidir");
+                //RuleFor(a => a.HomeNumber).NotNull().WithMessage("Sahəni doldurun").MaximumLength(100).WithMessage("Şrift sayı 100 keçməməlidir");
                 RuleFor(a => a.MobileNumber).NotNull().WithMessage("Sahəni doldurun").MaximumLength(100).WithMessage("Şrift sayı 100 keçməməlidir");
             }
         }
