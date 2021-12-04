@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 namespace KhamsaCourseProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [TypeFilter(typeof(IncludeRoles))]
     public class UserController : Controller
     {
         private readonly AdminContext _db;
@@ -174,6 +173,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
 
             return RedirectToAction("Index", "Home", new { Area = "Admin" });
         }
+        [TypeFilter(typeof(IncludeRoles))]
         [HttpGet]
         public IActionResult ChangePassword()
         {
