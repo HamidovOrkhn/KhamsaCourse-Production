@@ -191,6 +191,16 @@ namespace KhamsaCourseProject.Areas.Admin.Helpers
             {
                 Console.WriteLine($"--> Data already exists context:{nameof(db.StudentLessonSectors)}");
             }
+            if (!db.EmployeeLessonTypes.Any())
+            {
+                db.EmployeeLessonTypes.AddRange(new List<EmployeeLessonType>() {
+                    new EmployeeLessonType { Name = "Riyaziyyat" }
+                });
+            }
+            else
+            {
+                Console.WriteLine($"--> Data already exists context:{nameof(db.EmployeeLessonTypes)}");
+            }
             db.SaveChanges();
         }
     }

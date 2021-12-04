@@ -12,6 +12,8 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
         public List<Sector> Sectors { get; set; }
         public List<EmployeeType> EmployeeTypes { get; set; }
         public List<ContractType> ContractTypes { get; set; }
+        public List<EmployeeLessonType> EmployeeLessonTypes { get; set; }
+        public List<EmployeeLessonType> EmployeeLessonType { get; set; }
         public int ContractType { get; set; }
         public DateTime ContractDate { get; set; }
         public int Value { get; set; }

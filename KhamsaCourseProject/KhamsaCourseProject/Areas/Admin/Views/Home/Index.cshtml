@@ -1,10 +1,24 @@
 ﻿@model List<HomeDto>
-@{
-    ViewData["Title"] = "Ana Səhifə";
+@{ ViewData["Title"] = "Ana Səhifə";
     Random rnd = new Random();
-    string[] colors = { "bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-dark", "bg-muted" };
-}
+    string[] colors = { "bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-dark", "bg-muted" }; }
 <div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header"><h4>Prosesslərin Müqayisəsi</h4></div>
+            <div class="card-body">
+                <canvas id="paymentChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header"><h4>Gəlir Zərər Say Müqayisəsi</h4></div>
+            <div class="card-body">
+                <canvas id="paymentChartDiffer"></canvas>
+            </div>
+        </div>
+    </div>
     <div class="col-6">
         <div class="card">
             <div class="card-header"><h4>Tələbə Sayı</h4></div>
@@ -25,21 +39,20 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-4">
-            <div class="card @(colors[rnd.Next(0, 7)]) text-white">
-                <div class="card-body text-center">
-                    <figure class="avatar mb-3 border-0">
-                        <span class="avatar-title bg-white text-primary rounded-circle">
-                        </span>
-                    </figure>
-                    <h2 class="font-weight-bold mb-3">Tələbə Sayı : @item.StudentCount</h2>
-                    <h5 class="mb-0">@item.SectorName</h5>
-                </div>
-            </div>
+<div class="col-4">
+    <div class="card @(colors[rnd.Next(0, 7)]) text-white">
+        <div class="card-body text-center">
+            <figure class="avatar mb-3 border-0">
+                <span class="avatar-title bg-white text-primary rounded-circle">
+                </span>
+            </figure>
+            <h2 class="font-weight-bold mb-3">Tələbə Sayı : @item.StudentCount</h2>
+            <h5 class="mb-0">@item.SectorName</h5>
         </div>
-    }
+    </div>
+</div>}
 </div>
-@section Scripts{ 
+@section Scripts{
     <script>
     $(document).ready(function () {
 
@@ -49,8 +62,50 @@
         $.get("@Url.Action("OfficeCounts", "Home",new { Area="Admin"})", function (data) {
             ShowLineChart('monthly-linechart-office', data, '#2196f3')
         })
+        $.get("@Url.Action("PaymentCategories", "Home",new { Area="Admin"})", function (data) {
+            console.log(data);
+            ShowPieChart(data, "paymentChart");
+        })
+        $.get("@Url.Action("PaymentTypes", "Home",new { Area="Admin"})", function (data) {
+            console.log(data);
+            ShowPieChart(data, "paymentChartDiffer");
+        })
+        function ShowPieChart(data, selector) {
+            var oilCanvas = document.getElementById(selector);
+
+            //Chart.defaults.global.defaultFontFamily = "Lato";
+            //Chart.defaults.global.defaultFontSize = 18;
+            var labels = [];
+            var colors = [];
+            var numbers = [];
+            for (var i = 0; i < data.length; i++) {
+                labels.push(data[i].category);
+                numbers.push(data[i].total);
+                var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                if (colors.find(a => a == color)) {
+                    color = "#" + Math.floor(Math.random() * 16777215).toString(16)
+                }
+                colors.push(color);
+            }
+            console.log(labels)
+            console.log(colors)
+            console.log(numbers)
+            var oilData = {
+                labels: labels,
+                datasets: [
+                    {
+                        data: numbers,
+                        backgroundColor: colors
+                    }]
+            };
+
+            var pieChart = new Chart(oilCanvas, {
+                type: 'pie',
+                data: oilData
+            });
+        }
         function ShowLineChart(selectorD, data, color) {
-            var ctx = document.getElementById(selectorD).getContext('2d');
+        var ctx = document.getElementById(selectorD).getContext('2d');
 
         var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
         gradientStroke.addColorStop(0, '#80b6f4');

@@ -218,5 +218,106 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             return RedirectToAction("IndexLessonSector");
         }
         #endregion
+        #region EmployeeTypes
+        public IActionResult IndexEmployeeType()
+        {
+            return View(_db.EmployeeTypes.ToList());
+        }
+        [HttpGet]
+        public IActionResult CreateEmployeeType()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateEmployeeType(EmployeeType request)
+        {
+            _db.EmployeeTypes.Add(request);
+            _db.SaveChanges();
+            return RedirectToAction("IndexEmployeeType");
+        }
+        [HttpGet]
+        public IActionResult EditEmployeeType(int id)
+        {
+            EmployeeType dt = new EmployeeType();
+            if (dt is object)
+            {
+                dt = _db.EmployeeTypes.Where(a => a.Id == id).FirstOrDefault();
+            }
+            return View(dt);
+        }
+        [HttpPost]
+        public IActionResult EditEmployeeType(int id, EmployeeType request)
+        {
+            EmployeeType dt = _db.EmployeeTypes.Where(a => a.Id == id).FirstOrDefault();
+            if (dt is object)
+            {
+                dt.Name = request.Name;
+                _db.SaveChanges();
+            }
+            return RedirectToAction("IndexEmployeeType");
+        }
+        [HttpGet]
+        public IActionResult DeleteEmployeeType(int id)
+        {
+            EmployeeType dt = _db.EmployeeTypes.Where(a => a.Id == id).FirstOrDefault();
+            if (dt is object)
+            {
+                _db.EmployeeTypes.Remove(dt);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("IndexEmployeeType");
+        }
+        #endregion
+        #region EmployeeLessonTypes
+        public IActionResult IndexEmployeeLessonType()
+        {
+            return View(_db.EmployeeLessonTypes.ToList());
+        }
+        [HttpGet]
+        public IActionResult CreateEmployeeLessonType()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateEmployeeLessonType(EmployeeLessonType request)
+        {
+            _db.EmployeeLessonTypes.Add(request);
+            _db.SaveChanges();
+            return RedirectToAction("IndexEmployeeLessonType");
+        }
+        [HttpGet]
+        public IActionResult EditEmployeeLessonType(int id)
+        {
+            EmployeeLessonType dt = new EmployeeLessonType();
+            if (dt is object)
+            {
+                dt = _db.EmployeeLessonTypes.Where(a => a.Id == id).FirstOrDefault();
+            }
+            return View(dt);
+        }
+        [HttpPost]
+        public IActionResult EditEmployeeLessonType(int id, EmployeeLessonType request)
+        {
+            EmployeeLessonType dt = _db.EmployeeLessonTypes.Where(a => a.Id == id).FirstOrDefault();
+            if (dt is object)
+            {
+                dt.Name = request.Name;
+                _db.SaveChanges();
+            }
+            return RedirectToAction("IndexEmployeeLessonType");
+        }
+        [HttpGet]
+        public IActionResult DeleteEmployeeLessonType(int id)
+        {
+            EmployeeLessonType dt = _db.EmployeeLessonTypes.Where(a => a.Id == id).FirstOrDefault();
+            if (dt is object)
+            {
+                _db.EmployeeLessonTypes.Remove(dt);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("IndexEmployeeLessonType");
+        }
+        #endregion
+
     }
 }

@@ -37,7 +37,7 @@
                         <tr>
                             <th scope="col">Ödəniş Tarixi</th>
                             <th scope="col">Dəyər</th>
-                            <th scope="col">Müqavilə Dəyəri</th>
+                            <th scope="col">Qeyd</th>
                             <th scope="col">Tipi</th>
                         </tr>
                     </thead>
@@ -146,7 +146,16 @@
                 Saat Hesabı
             </th>
             <th>
-                Maaş
+                Saat sayı
+            </th>
+            <th>
+                Ödənəcək məbləğ
+            </th>
+            <th>
+                Cəmi Bonus
+            </th>
+            <th>
+                Cəmi Avans
             </th>
             <th>
                 Prosesslər
@@ -174,33 +183,33 @@
             <td>
                 @item.Sector.Name
             </td>
-            @if (item.EmployeeContract is object)
-            {
-                <td>@item.EmployeeContract.Value</td>
-
-            }
-            else
-            {
-                <td>Yoxdur</td>
-            }
-            @if (item.EmployeeContract is object)
-            {
-                <td>@item.EmployeeContract.Debt</td>
-            }
-            else
-            {
-                <td>Yoxdur</td>
-            }
+            <td>
+                @item.PaymentPerHour AZN
+            </td>
+            <td>
+                @item.Hours saat
+            </td>
+            <td>
+                @((item.Hours * item.PaymentPerHour) + item.Bonus - item.Avans - item.Payment)
+            </td>
+            <td>
+                @item.Bonus
+            </td>
+            <td>
+                @item.Avans
+            </td>
             @if (item.IsActive == 1)
             {
-                <td>
-                    <a asp-action="Edit" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a>|
-                    <a href="#" data-url="@Url.Action("Details","Employee",new { id = item.Id })" class="get-details" title="Detallar"><img src="~/admin/img/info--v4.gif" width="20px" alt="Detallar" /></a> |
-                    <a asp-action="Delete" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>|
-                    <a asp-action="PayContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Ödəniş et"><img src="~/admin/img/payment.jpg" width="25px" alt="odenis" /></a> |
-                    <a asp-action="CostContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Alacağ"><img src="~/admin/img/moneyicon.png" width="25px" alt="Alacağ" /></a> |
-                    <a asp-action="Deactivate" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Arxivlə"><img src="~/admin/img/archive.png" width="20px" alt="Arxivle" /></a>
-                </td>
+        <td>
+            <a asp-action="Edit" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a>|
+            <a href="#" data-url="@Url.Action("Details","Employee",new { id = item.Id })" class="get-details" title="Detallar"><img src="~/admin/img/info--v4.gif" width="20px" alt="Detallar" /></a> |
+            <a asp-action="Delete" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>|
+            <a asp-action="PayContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Bonus"><img src="~/admin/img/payment.jpg" width="25px" alt="Bonus" /></a> |
+            <a asp-action="CostContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Avans"><img src="~/admin/img/moneyicon.png" width="25px" alt="Avans" /></a> |
+            <a asp-action="EmployeePayment" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Ödəniş"><img src="~/admin/img/paymentemp.png" width="25px" alt="Ödəniş" /></a> |
+            <a asp-action="EmployeeReset" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Sıfırla"><img src="~/admin/img/reset.png" width="25px" alt="Sıfırla" /></a> |
+            <a asp-action="Deactivate" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Arxivlə"><img src="~/admin/img/archive.png" width="20px" alt="Arxivle" /></a>
+        </td>
             }
             else
             {
@@ -278,13 +287,16 @@
                     var ltr = `<tr>
                                           <th scope="row">${data.payments[i].paymentDate}</th>
                                           <td>${data.payments[i].value} AZN</td>
-                                          <td>${data.payments[i].contractValue} AZN</td>`;
+                                          <td>${data.payments[i].desc}</td>`;
 
-                    if (data.payments[i].paymentType == 1) {
-                        ltr += `<td>Veriləcək</td>`;
+                    if (data.payments[i].paymentCategoryId == 3) {
+                        ltr += `<td>Avans</td>`;
+                    }
+                    else if (data.payments[i].paymentCategoryId == 6) {
+                        ltr += `<td>Əmək Haqqı</td>`;
                     }
                     else {
-                        ltr += `<td>Alacaq</td>`;
+                        ltr += `<td>Bonus</td>`;
                     }
 
                     ltr += `</tr>`;
@@ -306,13 +318,16 @@
                     var ltr = `<tr>
                                           <th scope="row">${data.payments[i].paymentDate}</th>
                                           <td>${data.payments[i].value} AZN</td>
-                                          <td>${data.payments[i].contractValue} AZN</td>`;
+                                          <td>${data.payments[i].desc}</td>`;
 
-                    if (data.payments[i].paymentType == 1) {
-                        ltr += `<td>Veriləcək</td>`;
+                    if (data.payments[i].paymentCategoryId == 3) {
+                        ltr += `<td>Avans</td>`;
+                    }
+                    else if (data.payments[i].paymentCategoryId == 6) {
+                        ltr += `<td>Əmək Haqqı</td>`;
                     }
                     else {
-                        ltr += `<td>Alacaq</td>`;
+                        ltr += `<td>Bonus</td>`;
                     }
 
                     ltr += `</tr>`;

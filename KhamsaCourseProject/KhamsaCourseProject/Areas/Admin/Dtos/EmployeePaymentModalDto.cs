@@ -7,6 +7,7 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
 {
     public class EmployeePaymentModalDto:PaymentModalDto
     {
-        public int PaymentType { get; set; }
+        public int PaymentCategoryId { get; set; }
+        public string Desc { get; set; }
     }
 }

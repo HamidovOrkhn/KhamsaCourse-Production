@@ -16,11 +16,15 @@ namespace KhamsaCourseProject.Areas.Admin.Models
         public DateTime RegistrationDate { get; set; }
         public List<StudentPayment> StudentPayments { get; set; }
         public int SectorId { get; set; }
+        public int Hours { get; set; }
+        public int PaymentPerHour { get; set; }
+        public double Bonus { get; set; }
+        public double Avans { get; set; }
+        public double Payment { get; set; }
         public Sector Sector { get; set; }
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
-        public int EmployeeContractId { get; set; }
-        public EmployeeContract EmployeeContract { get; set; }
+        public int EmployeeLessonTypeId { get; set; }
         public class EmployeeValidator : AbstractValidator<Employee>
         {
             public EmployeeValidator()
@@ -29,6 +33,8 @@ namespace KhamsaCourseProject.Areas.Admin.Models
                 RuleFor(a => a.EmployeeTypeId).NotNull().WithMessage("Sahəni doldurun");
                 RuleFor(a => a.SectorId).NotNull().WithMessage("Sahəni doldurun");
                 RuleFor(a => a.RegistrationDate).NotNull().WithMessage("Sahəni doldurun");
+                RuleFor(a => a.Hours).NotNull().WithMessage("Sahəni doldurun");
+                RuleFor(a => a.PaymentPerHour).NotNull().WithMessage("Sahəni doldurun");
                 RuleFor(a => a.Fullname).NotNull().WithMessage("Sahəni doldurun").MaximumLength(300).WithMessage("Şrift sayı 300 keçməməlidir");
                 RuleFor(a => a.PhoneNumber).NotNull().WithMessage("Sahəni doldurun").MaximumLength(100).WithMessage("Şrift sayı 100 keçməməlidir");
                 RuleFor(a => a.MobileNumber).NotNull().WithMessage("Sahəni doldurun").MaximumLength(100).WithMessage("Şrift sayı 100 keçməməlidir");

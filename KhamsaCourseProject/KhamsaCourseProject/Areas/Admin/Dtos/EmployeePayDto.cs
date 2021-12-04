@@ -12,7 +12,6 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
         public double Value { get; set; }
         public DateTime PaymentDate { get; set; }
         public string Description { get; set; }
-        public EmployeeContract Contract { get; set; }
         public class EmployeePayDtoValidator : AbstractValidator<EmployeePayDto>
         {
             public EmployeePayDtoValidator()

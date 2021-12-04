@@ -35,16 +35,17 @@ namespace KhamsaCourseProject.Areas.Admin.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
-        public DbSet<EmployeeContract> EmployeeContracts { get; set; }
+        public DbSet<EmployeeLessonType> EmployeeLessonTypes { get; set; }
+        //public DbSet<EmployeeContract> EmployeeContracts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>()
             .HasOne(p => p.Contract)
             .WithOne(b => b.Student).HasForeignKey<StudentContract>(b => b.StudentId);
 
-            modelBuilder.Entity<Employee>()
-           .HasOne(p => p.EmployeeContract)
-           .WithOne(b => b.Employee).HasForeignKey<EmployeeContract>(b => b.EmployeeId);
+           // modelBuilder.Entity<Employee>()
+           //.HasOne(p => p.EmployeeContract)
+           //.WithOne(b => b.Employee).HasForeignKey<EmployeeContract>(b => b.EmployeeId);
         }
 
     }

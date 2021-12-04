@@ -164,7 +164,6 @@ namespace KhamsaCourseProject.Areas.Admin.Helpers
            .Include(a => a.Sector)
            .Include(a => a.EmployeeType)
            .Include(a => a.Sector)
-           .Include(a => a.EmployeeContract)
            .OrderByDescending(a => a.RegistrationDate).ToList();
             if (Status == 0)
             {

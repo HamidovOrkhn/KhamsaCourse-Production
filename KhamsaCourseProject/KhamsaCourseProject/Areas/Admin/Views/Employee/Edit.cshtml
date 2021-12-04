@@ -42,6 +42,27 @@
                 <span asp-validation-for="RegistrationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Hours" class="control-label">Saat sayı</label>
+                <input asp-for="Hours" placeholder="Saat sayı" class="form-control" />
+                <span asp-validation-for="Hours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentPerHour" class="control-label">Saat başı ödəniş</label>
+                <input asp-for="PaymentPerHour" placeholder="Saat başı ödəniş" class="form-control" />
+                <span asp-validation-for="PaymentPerHour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeLessonTypeId" class="control-label">İxtisas</label>
+                <select asp-for="EmployeeLessonTypeId" class="form-control">
+                    @foreach (var item in Model.EmployeeLessonTypes)
+                    {
+                        <option value=@item.Id>@item.Name</option>
+                    }
+
+                </select>
+                <span asp-validation-for="EmployeeLessonTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="SectorId" class="control-label">Filial</label>
                 <select asp-for="SectorId" class="form-control">
                     @foreach (var item in Model.Sectors)
@@ -52,35 +73,8 @@
                 </select>
                 <span asp-validation-for="SectorId" class="text-danger"></span>
             </div>
-            <div class="row mt-5 justify-content-center">
-                <div class="col-md-12">
-                    <h4>Müqavilə</h4>
-                    <hr />
-                    <div class="form-group">
-                        <label asp-for="ContractType" class="control-label">Əməliyyat</label>
-                        <select asp-for="ContractType" class="form-control">
-                            @foreach (var item in Model.ContractTypes)
-                            {
-                                <option value=@item.Id>@item.Name</option>
-                            }
-
-                        </select>
-                        <span asp-validation-for="ContractType" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ContractDate" class="control-label">Müqavilə Tarixi</label>
-                        <input type="date" asp-for="ContractDate" class="form-control" />
-                        <span asp-validation-for="ContractDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Value" class="control-label">Ödəmə Miqdarı</label>
-                        <input asp-for="Value" class="form-control" />
-                        <span asp-validation-for="Value" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
             <div class="form-group">
-                <input type="submit" value="Yadda Saxla" class="btn btn-primary" />
+                <input type="submit" value="Əlavə Et" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -7,6 +7,8 @@ using KhamsaCourseProject.Areas.Admin.Filters;
 using KhamsaCourseProject.Areas.Admin.Data;
 using KhamsaCourseProject.Areas.Admin.Dtos;
 using System.Globalization;
+using KhamsaCourseProject.Areas.Admin.Models;
+using KhamsaCourseProject.Areas.Admin.Helpers.Enums;
 
 namespace KhamsaCourseProject.Areas.Admin.Controllers
 {
@@ -57,6 +59,34 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
               .Select(g => new
               {
                   Month = new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMMM", ci),
+                  Total = g.Count()
+              });
+            return Json(studentCounts);
+        }
+        public IActionResult PaymentCategories()
+        {
+            CultureInfo ci = new CultureInfo("az-Latn-AZ");
+            var studentCounts = _db.Payments.Where(a => a.PaymentDate > DateTime.Now.AddMonths(-1)).GroupBy(o => new
+            {
+                Category = o.CategoryId,
+            })
+              .Select(g => new
+              {
+                  Category = PaymentCategoryEn.ReturnCategoryName(g.Key.Category),
+                  Total = g.Count()
+              });
+            return Json(studentCounts);
+        }
+        public IActionResult PaymentTypes()
+        {
+            CultureInfo ci = new CultureInfo("az-Latn-AZ");
+            var studentCounts = _db.Payments.Where(a => a.PaymentDate > DateTime.Now.AddMonths(-1)).GroupBy(o => new
+            {
+                Category = o.PaymentTypeId,
+            })
+              .Select(g => new
+              {
+                  Category = PaymentCategoryEn.ReturnTypeName(g.Key.Category),
                   Total = g.Count()
               });
             return Json(studentCounts);

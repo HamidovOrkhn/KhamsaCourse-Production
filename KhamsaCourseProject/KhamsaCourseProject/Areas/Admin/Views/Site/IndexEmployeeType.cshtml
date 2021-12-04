@@ -1,0 +1,39 @@
+﻿@model IEnumerable<KhamsaCourseProject.Areas.Admin.Models.EmployeeType>
+
+@{
+    ViewData["Title"] = "IndexEmployeeType";
+}
+
+<p>
+    <a class="btn btn-primary" asp-action="CreateEmployeeType">Yeni</a>
+</p>
+<table class="table table-bordered">
+    <thead style="background-color:cornflowerblue;color:white;">
+        <tr>
+            <th>
+                Sıra nömrəsi
+            </th>
+            <th>
+                Adı
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="EditEmployeeType" asp-controller="Site" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a> |
+                    <a asp-action="DeleteEmployeeType" asp-controller="Site" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
