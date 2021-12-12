@@ -137,6 +137,9 @@
                 Tipi
             </th>
             <th>
+                İxtisası
+            </th>
+            <th>
                 Mobil Telefonu
             </th>
             <th>
@@ -152,7 +155,7 @@
                 Ödənəcək məbləğ
             </th>
             <th>
-                Cəmi Bonus
+                Cəmi Əlavə Gəlir
             </th>
             <th>
                 Cəmi Avans
@@ -177,6 +180,22 @@
             <td>
                 @item.EmployeeType.Name
             </td>
+            @{
+
+                var lessonType = Model.EmployeeLessonTypes.Where(a => a.Id == item.EmployeeLessonTypeId).FirstOrDefault();
+            }
+            @if (lessonType is object)
+            {
+                <td>
+                    @lessonType.Name
+                </td>
+            }
+            else
+            {
+                <td>
+                    
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.MobileNumber)
             </td>
@@ -200,16 +219,16 @@
             </td>
             @if (item.IsActive == 1)
             {
-        <td>
-            <a asp-action="Edit" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a>|
-            <a href="#" data-url="@Url.Action("Details","Employee",new { id = item.Id })" class="get-details" title="Detallar"><img src="~/admin/img/info--v4.gif" width="20px" alt="Detallar" /></a> |
-            <a asp-action="Delete" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>|
-            <a asp-action="PayContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Bonus"><img src="~/admin/img/payment.jpg" width="25px" alt="Bonus" /></a> |
-            <a asp-action="CostContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Avans"><img src="~/admin/img/moneyicon.png" width="25px" alt="Avans" /></a> |
-            <a asp-action="EmployeePayment" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Ödəniş"><img src="~/admin/img/paymentemp.png" width="25px" alt="Ödəniş" /></a> |
-            <a asp-action="EmployeeReset" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Sıfırla"><img src="~/admin/img/reset.png" width="25px" alt="Sıfırla" /></a> |
-            <a asp-action="Deactivate" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Arxivlə"><img src="~/admin/img/archive.png" width="20px" alt="Arxivle" /></a>
-        </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Duzəliş et"><img src="~/admin/img/edit3.png" width="20px" alt="Duzelis" /></a>|
+                    <a href="#" data-url="@Url.Action("Details","Employee",new { id = item.Id })" class="get-details" title="Detallar"><img src="~/admin/img/info--v4.gif" width="20px" alt="Detallar" /></a> |
+                    <a asp-action="Delete" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Sil"><img src="~/admin/img/delete2.png" width="20px" alt="Sil" /></a>|
+                    <a asp-action="PayContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Əlavə Gəlir"><img src="~/admin/img/payment.jpg" width="25px" alt="Bonus" /></a> |
+                    <a asp-action="CostContract" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Avans"><img src="~/admin/img/moneyicon.png" width="25px" alt="Avans" /></a> |
+                    <a asp-action="EmployeePayment" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Ödəniş"><img src="~/admin/img/paymentemp.png" width="25px" alt="Ödəniş" /></a> |
+                    <a asp-action="EmployeeReset" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Sıfırla"><img src="~/admin/img/reset.png" width="25px" alt="Sıfırla" /></a> |
+                    <a asp-action="Deactivate" asp-controller="Employee" asp-area="Admin" asp-route-id="@item.Id" title="Arxivlə"><img src="~/admin/img/archive.png" width="20px" alt="Arxivle" /></a>
+                </td>
             }
             else
             {

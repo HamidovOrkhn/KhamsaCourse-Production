@@ -12,5 +12,6 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
         public double ContractValue { get; set; }
         #nullable enable
         public long? Id { get; set; }
+        public string Desc { get; set; }
     }
 }

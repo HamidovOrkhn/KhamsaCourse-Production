@@ -38,6 +38,7 @@
                             <th scope="col">Ödəniş Tarixi</th>
                             <th scope="col">Dəyər</th>
                             <th scope="col">Müqavilə Dəyəri</th>
+                            <th scope="col">Qeyd</th>
                             <th>Əməliyyat</th>
                         </tr>
                     </thead>
@@ -438,6 +439,7 @@
                                               <th scope="row">${data.payments[i].paymentDate}</th>
                                               <td>${data.payments[i].value} AZN</td>
                                               <td>${data.payments[i].contractValue} AZN</td>
+                                              <td>${data.payments[i].desc}</td>
                                               <td><a href='${checkUrl}' class='btn btn-success'>Çek</a></td>`;;
 
                     ltr += `</tr>`;
@@ -461,6 +463,7 @@
                                               <th scope="row">${data.payments[i].paymentDate}</th>
                                               <td>${data.payments[i].value} AZN</td>
                                               <td>${data.payments[i].contractValue} AZN</td>
+                                              <td>${data.payments[i].desc}</td>
                                               <td><a href='${checkUrl}' class='btn btn-success'>Çek</a></td>`;
 
 

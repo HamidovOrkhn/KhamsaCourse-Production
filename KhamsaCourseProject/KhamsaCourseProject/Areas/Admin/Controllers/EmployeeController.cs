@@ -43,6 +43,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             data = (data).Skip(page * 10).Take(10).ToList();
 
             model.Employees = data;
+            model.EmployeeLessonTypes = _db.EmployeeLessonTypes.ToList();
             model.Pagination = ExConverter.PaginationMethod(page, count);
 
             return View(model);
@@ -128,6 +129,7 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
             employee.SectorId = request.SectorId;
             employee.EmployeeTypeId = request.EmployeeTypeId;
             employee.Hours = request.Hours;
+            employee.EmployeeLessonTypeId = request.EmployeeLessonTypeId;
             employee.PaymentPerHour = request.PaymentPerHour;
             #endregion
 

@@ -11,5 +11,6 @@ namespace KhamsaCourseProject.Areas.Admin.Dtos
         public PaginationDto Pagination { get; set; }
         public List<Employee> Employees { get; set; }
         public List<EmployeeType> EmployeeTypes { get; set; }
+        public List<EmployeeLessonType> EmployeeLessonTypes { get; set; }
     }
 }

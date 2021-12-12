@@ -204,7 +204,8 @@ namespace KhamsaCourseProject.Areas.Admin.Controllers
                 Id = a.Id,
                 PaymentDate = a.PaymentDate.ToString("yyyy-MMM-dd HH:mm"),
                 Value = a.Value,
-                ContractValue = contract.Value
+                ContractValue = contract.Value,
+                Desc = a.Description
             }).ToList();
 
             return Json(new
